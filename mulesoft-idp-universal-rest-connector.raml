@@ -45,12 +45,6 @@ uses:
 
 
 /actions/{action-id}/versions/{action-version}/executions:
-  uriParameters:
-    action-id:
-      type: field-actionId
-    action-version:
-      type: field-actionVersion
-  
   post:
     displayName: IDP - postDocumentActionExecution
     description:
@@ -137,6 +131,12 @@ uses:
           body:
             application/problem+json:
               type: object-commonError
+              
+    uriParameters:
+    action-id:
+      type: field-actionId
+    action-version:
+      type: field-actionVersion
 
 types:
   callback:
