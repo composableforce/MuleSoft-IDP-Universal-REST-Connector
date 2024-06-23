@@ -23,7 +23,6 @@ description: |
 baseUri: https://idp-rt.{region}.anypoint.mulesoft.com/api/{apiVersion}/organizations/{orgId}
 baseUriParameters:
   region:
-    description: MuleSoft IDP Plane Region
     type: field-region
     required: true
   apiVersion:
@@ -206,7 +205,8 @@ types:
   field-region:
     displayName: Region
     description: |
-      Currently supported Runime Regions us-east-1
+      Currently supported IDP Runtime Regions
+      - us-east-1
       - eu-central-1
     type: string
     enum:
