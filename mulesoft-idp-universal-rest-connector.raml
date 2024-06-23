@@ -151,6 +151,7 @@ types:
       - application/json
       - application/problem+json
     default: application/json
+    pattern: ^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$
 
   field-runtimeRegion:
     displayName: IDP Runtime Region
@@ -226,7 +227,6 @@ types:
       - SUCCEEDED
     example: IN_PROGRESS
     type: string
-    pattern: ^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$
 
   DocumentExecutionPostResponse:
     type: object
