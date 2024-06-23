@@ -23,7 +23,7 @@ description: |
 baseUri: https://idp-rt.{region}.anypoint.mulesoft.com/api/{apiVersion}/organizations/{orgId}
 baseUriParameters:
   region:
-    type: field-runtimeregion
+    type: field-runtimeRegion
     required: true
   apiVersion:
     type: field-version
@@ -139,11 +139,13 @@ types:
     type: object
     properties:
       noAuthUrl: string
+
   field-valueOnly:
     displayName: Values Only
     description: |
       Un-supported so use with Caution - Return Confidence levels when set to false
     type: boolean
+
   field-contentType:
     displayName: Content Type
     description: |
@@ -153,7 +155,8 @@ types:
       - application/json
       - application/problem+json
     default: application/json
-  field-region:
+
+  field-runtimeRegion:
     displayName: IDP Runtime Region
     description: |
       Currently supported IDP Runtime Regions
@@ -165,7 +168,8 @@ types:
       - eu-central-1
     default: us-east-1
     pattern: ^[a-z]{2}-[a-z]+-\d+$
-  field-version:
+
+  field-platformApiVersion:
     displayName: IDP Platform API Version
     description: Current version of the MuleSoft IDP Platform API
     type: string
