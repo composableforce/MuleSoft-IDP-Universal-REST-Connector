@@ -5,13 +5,6 @@
       "assetId": "rest-connect-library",
       "groupId": "org.mule.connectivity",
       "provided": false
-    },
-    {
-      "version": "1.1.0",
-      "assetId": "authentication-security-best-practices",
-      "groupId": "68ef9520-24e9-4cf2-b2f5-620025690913",
-      "provided": false,
-      "scope": "validation"
     }
   ],
   "version": "1.0.0",
