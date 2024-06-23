@@ -84,6 +84,7 @@ uses:
       201:
         headers:
           Content-Type:
+            description:
             type: field-contentType
         description: Created
         body:
@@ -111,6 +112,7 @@ uses:
         404:
           headers:
             Content-Type:
+              description:
               type: field-contentType
           description: Not Found
           body:
@@ -119,6 +121,7 @@ uses:
         406:
           headers:
             Content-Type:
+              description:
               type: field-contentType
           description: Not Acceptable
           body:
@@ -127,6 +130,7 @@ uses:
         429:
           headers:
             Content-Type:
+              description:
               type: field-contentType
           description: Too Many Requests
           body:
