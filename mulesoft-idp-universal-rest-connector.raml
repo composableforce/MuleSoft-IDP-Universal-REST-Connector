@@ -92,11 +92,12 @@ uses:
       execution-id:
         type: field-executionId
     get:
-      displayName: IDP - getDocumentActionExecution
+      (rest-connect.operationName): IDP - getDocumentActionExecution
+      displayName: getDocumentActionExecution
       description:
       queryParameters:
         valueOnly:
-          type: boolean
+          type: field-valueOnly
           required: false
 
       responses:
@@ -143,7 +144,7 @@ types:
     description: |
       Un-supported so use with Caution - Return Confidence levels when set to false
     type: boolean
-
+    
 
   field-contentType:
     displayName: Content Type
