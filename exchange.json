@@ -1,0 +1,10 @@
+{
+  "main": "mulesoft-idp-universal-rest-connector.raml",
+  "name": "MuleSoft IDP Universal REST Connector",
+  "groupId": "eca25329-9592-4ff1-9054-1b08d103b991",
+  "assetId": "mulesoft-idp-universal-rest-connector",
+  "version": "1.0.0",
+  "classifier": "raml",
+  "tags": [],
+  "descriptorVersion": "1.0.0"
+}
