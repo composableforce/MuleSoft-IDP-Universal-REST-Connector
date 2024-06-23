@@ -156,6 +156,7 @@ types:
     type: string
     enum:
       - application/json
+      - application/problem+json
     default: application/json
     pattern: ^(application|audio|font|example|image|message|model|multipart|text|video|x-[^/\s]+|[^/\s]+/[^/\s]+)$
 
@@ -370,7 +371,7 @@ securitySchemes:
           description: |
             Bad or expired token. This can happen if the API consumer uses a revoked or expired access token. To fix, you should re-authenticate the user.
           body:
-            application/json:
+            application/problem+json:
               type: object-commonError
         403:
           headers:
@@ -379,5 +380,5 @@ securitySchemes:
           description: |
             Bad OAuth request (wrong consumer key, bad nonce, expired timestamp...). Unfortunately, re-authenticating the user won't help here.
           body:
-            application/json:
+            application/problem+json:
               type: object-commonError
