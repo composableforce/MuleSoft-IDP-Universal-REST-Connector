@@ -378,8 +378,6 @@ securitySchemes:
         401:
           headers:
             Content-Type:
-              description:
-              type: field-contentType
           description: |
             Bad or expired token. This can happen if the API consumer uses a revoked or expired access token. To fix, you should re-authenticate the user.
           body:
