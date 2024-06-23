@@ -312,7 +312,7 @@ types:
       confidenceScore?:
         type: number
 
-  Commo:
+  object-commonError:
     displayName: IDP Common Error Response
     description: IDP Common Error Response
     properties:
@@ -372,7 +372,7 @@ securitySchemes:
             Bad or expired token. This can happen if the API consumer uses a revoked or expired access token. To fix, you should re-authenticate the user.
           body:
             application/problem+json:
-              type: ErrorResponse
+              type: object-commonError
         403:
           headers:
             Content-Type:
@@ -381,4 +381,4 @@ securitySchemes:
             Bad OAuth request (wrong consumer key, bad nonce, expired timestamp...). Unfortunately, re-authenticating the user won't help here.
           body:
             application/problem+json:
-              type: ErrorResponse
+              type: object-commonError
