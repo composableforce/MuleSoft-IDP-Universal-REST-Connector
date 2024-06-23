@@ -387,6 +387,8 @@ securitySchemes:
         403:
           headers:
             Content-Type:
+              description:
+              type: field-contentType
           description: |
             Bad OAuth request (wrong consumer key, bad nonce, expired timestamp...). Unfortunately, re-authenticating the user won't help here.
           body:
