@@ -87,9 +87,9 @@ uses:
         body:
           application/json: DocumentExecutionPostResponse
 
-  /{executionId}:
+  /{execution-id}:
     uriParameters:
-      executionId:
+      execution-id:
         type: field-executionId
     get:
       (rest-connect.operationName): IDP - getDocumentActionExecution
