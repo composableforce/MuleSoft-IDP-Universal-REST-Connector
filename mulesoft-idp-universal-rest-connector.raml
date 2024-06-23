@@ -58,50 +58,6 @@ uses:
     (rest-connect.operationName): IDP - postDocumentActionExecution
     displayName: postDocumentActionExecution
     description: |
-      ## [Execute the Published Document Actions](https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#execute-the-published-document-actions)
-      
-      After you publish document actions, configure a connected app, and obtain the access token, you can call the IDP API to execute your document actions. The following is a sample call that provides guidance about how to construct an API call to execute a document action:
-
-      ## Define a Callback URL
-      You can define a callback URL when you call IDP to execute your document actions. If defined, IDP calls the callback URL when the document action execution finishes. To specify the callback URL, include the callback field in your API call and define a JSON value with the callback URL.
-
-
-        **Accepted File Formats**: PDF, PNG, JPG (150 DPI or more recommended).
-        **File Size Limits**
-        - Upload via UI: 8 MB per file and 10 files max per upload.
-        - Upload via API: 10 MB per file, no limit on the number of files per upload.
-
-      ## Dataweave Example
-      ```
-        %dw 2.0
-        output xml
-        ns ns0 http://validationnamespace.raml.org
-        ---
-        {
-          ns0#root: {
-            ns0#callback: {
-              ns0#noAuthUrl: "https://yourCallbackURL.com?youCanUseQueryParms=SomeGreatValue"
-            },
-            ns0#file: readUrl("classpath://myPdf.pdf", "application/octet-stream")
-          }
-        }
-      ```
-      ## Dataweave Example 
-      ```
-        %dw 2.0
-        output java
-        import * from dw::core::Binaries
-        ---
-        {
-          root: {
-            callback: {
-              noAuthUrl: "https://yourCallbackURL.com?youCanUseQueryParms=SomeGreatValue&apikey=43243442342424"
-            },
-            file: fromBase64("JVBERi0xLjcNCiW...deleted for brevity.....0YNCg==")
-          }
-        }
-      ```
-
     body:
       multipart/form-data:
         properties:
