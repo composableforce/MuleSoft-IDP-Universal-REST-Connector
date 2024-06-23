@@ -237,8 +237,8 @@ types:
     type: string
 
   DocumentExecutionPostResponse:
-    type: object
     (rest-connect.default): application/json
+    type: object
     properties:
       id:
         type: field-executionId
@@ -253,7 +253,6 @@ types:
 
   DocumentExecutionGetResponse:
     type: object
-    (rest-connect.default): application/json
     properties:
       pages?:
         type: array
