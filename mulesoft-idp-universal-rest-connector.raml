@@ -104,6 +104,14 @@ uses:
         body:
           application/problem+json:
             type: object-commonError
+      500:
+        headers:
+           Content-Type:
+             description:
+        description: Not Acceptable
+        body:
+          application/problem+json:
+            type: object-commonError
 
   /{execution-id}:
     uriParameters:
