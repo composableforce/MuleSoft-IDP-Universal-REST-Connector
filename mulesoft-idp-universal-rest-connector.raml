@@ -30,7 +30,7 @@ baseUriParameters:
   orgId:
     type: field-orgId
     required: true
-    
+
 
 mediaType: [ multipart/form-data, application/json ]
 
@@ -88,6 +88,14 @@ uses:
         description: Created
         body:
           application/json: DocumentExecutionPost
+      400:
+        headers:
+          Content-Type:
+            description:
+        description: Bad Request
+        body:
+          application/problem+json:
+            type: object-commonError
 
   /{execution-id}:
     uriParameters:
