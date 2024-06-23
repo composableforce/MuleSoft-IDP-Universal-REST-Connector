@@ -1,2 +1,421 @@
 #%RAML 1.0
 title: MuleSoft IDP Universal REST Connector
+version: v1
+documentation:
+ - title: Why?
+   content: |
+     ### Welcome to MuleSoft IDP Universal REST Connector
+
+     Integrating IDP with Anypoint Studio https://docs.mulesoft.com/idp/integrating-idp-with-anypoint-studio 
+      "Each document action version generates a different connector. For example, when you publish a document action for the first time, it generates a connector in Exchange that executes version 1.0.0 of this document action. Then, if you modify the document action and republish it as version 1.1.0, it generates a different connector that you must download and install in Studio to execute this new document action version. Consider this behavior when building your integrations."
+
+ - title: Who?
+   content: |
+     Welcome to MuleSoft IDP Universal Connector
+
+ - title: How?
+   content: |
+     Welcome to MuleSoft IDP Universal Connector
+
+
+description: |
+  ### IDP Overview
+
+  [MuleSoft Documents](https://docs.mulesoft.com/idp/).
+
+  ![https://blogs.mulesoft.com/wp-content/uploads/IDP-Blog-Image-1.png](https://blogs.mulesoft.com/wp-content/uploads/IDP-Blog-Image-1.png)
+
+  MuleSoft Intelligent Document Processing (IDP) enables you to read invoices, purchase orders, and other unstructured or semi-structured documents and then analyze and refine the extracted content using AI capabilities to create a structured response 
+
+  ### IDP API
+  You can trigger the execution of any of your published document actions to analyze the provided documents and query the results of the execution by using the IDP API. You must configure a connected app to call the IDP API. For configuration and usage instructions, see: [Processing Documents and Retrieving Results With the API.](https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api).
+
+baseUri: https://idp-rt.{region}.anypoint.mulesoft.com/api/{apiVersion}/organizations/{orgId}
+
+baseUriParameters:
+  region:
+    type: field-region
+    required: true
+  apiVersion:
+    type: field-version
+    required: true
+  orgId:
+    type: field-orgId
+    required: true
+
+mediaType: [ multipart/form-data, application/json ]
+
+protocols:
+  - HTTPS
+
+securedBy:
+  -   mulesoft-connectedApp-oauth
+
+uses:
+  rest-connect: exchange_modules/org.mule.connectivity/rest-connect-library/1.0.2/rest-connect-library.raml
+
+
+/actions/{documentActionId}/versions/{documentActionVersion}/executions:
+  post:
+    (rest-connect.operationName): IDP - postDocumentActionExecution
+    displayName: postDocumentActionExecution
+    description: |
+      ## [Execute the Published Document Actions](https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#execute-the-published-document-actions)
+      
+      After you publish document actions, configure a connected app, and obtain the access token, you can call the IDP API to execute your document actions. The following is a sample call that provides guidance about how to construct an API call to execute a document action:
+
+      ## Define a Callback URL
+      You can define a callback URL when you call IDP to execute your document actions. If defined, IDP calls the callback URL when the document action execution finishes. To specify the callback URL, include the callback field in your API call and define a JSON value with the callback URL.
+
+
+        **Accepted File Formats**: PDF, PNG, JPG (150 DPI or more recommended).
+        **File Size Limits**
+        - Upload via UI: 8 MB per file and 10 files max per upload.
+        - Upload via API: 10 MB per file, no limit on the number of files per upload.
+
+      ## Dataweave Example
+      ```
+        %dw 2.0
+        output xml
+        ns ns0 http://validationnamespace.raml.org
+        ---
+        {
+          ns0#root: {
+            ns0#callback: {
+              ns0#noAuthUrl: "https://yourCallbackURL.com?youCanUseQueryParms=SomeGreatValue"
+            },
+            ns0#file: readUrl("classpath://myPdf.pdf", "application/octet-stream")
+          }
+        }
+      ```
+      ## Dataweave Example 
+      ```
+        %dw 2.0
+        output java
+        import * from dw::core::Binaries
+        ---
+        {
+          root: {
+            callback: {
+              noAuthUrl: "https://yourCallbackURL.com?youCanUseQueryParms=SomeGreatValue"
+            },
+            file: fromBase64("JVBERi0xLjcNCiW...deleted for brevity.....0YNCg==")
+          }
+        }
+      ```
+
+    body:
+      multipart/form-data:
+        properties:
+          callback: # Optional
+            (rest-connect.partName): callback
+            (rest-connect.partContentType): application/json
+            type: callback
+            required: false
+          file:
+            (rest-connect.partName): file     
+            (rest-connect.partContentType): application/octet-stream
+            (rest-connect.partFilenameParameter): filename
+            description: |
+                    **Accepted File Formats**: PDF, PNG, JPG (150 DPI or more recommended).
+                    **File Size Limits**: 10MB
+            type: file
+            fileTypes:
+              - image/jpeg
+              - image/png
+              - application/pdf
+            minLength: 1
+            maxLength: 10485760
+            required: true
+
+    responses:
+      201:
+        headers:
+          Content-Type:
+            type: field-contentType
+        description: Created
+        body:
+          application/json: DocumentExecutionPostResponse
+
+  uriParameters:
+    documentActionId:
+      description: Action GUID
+      type: field-actionId
+    documentActionVersion:
+      description: Action Version like 1.4.0
+      type: field-actionVersion
+
+  /{executionId}:
+    uriParameters:
+      executionId:
+        type: field-executionId
+    get:
+      (rest-connect.operationName): IDP - getDocumentActionExecution
+      displayName: getDocumentActionExecution
+      description: |
+      ## [Retrieve the Results of the Execution](https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#retrieve-the-results-of-the-execution)
+
+      queryParameters:
+        valueOnly:
+          type: field-valueOnly
+          required: false
+
+      responses:
+        200:
+          headers:
+            Content-Type:
+              type: field-contentType
+          description: Success
+          body:
+            application/json: DocumentExecutionGetResponse
+        404:
+          headers:
+            Content-Type:
+              type: field-contentType
+          description: Not Found
+          body:
+            application/problem+json:
+              type: ErrorResponse
+        406:
+          headers:
+            Content-Type:
+              type: field-contentType
+          description: Not Acceptable
+          body:
+            application/problem+json:
+              type: ErrorResponse
+        429:
+          headers:
+            Content-Type:
+              type: field-contentType
+          description: Too Many Requests
+          body:
+            application/problem+json:
+              type: ErrorResponse
+
+types:
+  callback:
+    type: object
+    properties:
+      noAuthUrl: string
+  field-valueOnly:
+    displayName: Values Only
+    description: |
+      Un-supported so use with Caution - Return Confidence levels when set to false
+    type: boolean
+  field-contentType:
+    displayName: Content Type
+    description: |
+      Currently supported media types
+    type: string
+    enum:
+      - application/json
+      - application/problem+json
+    default: application/json
+  field-region:
+    displayName: Region
+    description: |
+      Currently supported regions
+    type: string
+    enum:
+      - us-east-1
+    default: us-east-1
+    pattern: ^[a-z]{2}-[a-z]+-\d+$
+  field-version:
+    displayName: API Version
+    description: |
+      Currently supported versions
+    type: string
+    enum:
+      - v1
+    default: v1
+    maxLength: 2
+    minLength: 2
+    pattern: ^v[0-9]$
+  field-orgId:
+    displayName: Organization Id
+    description: |
+      Your Anypoint Organisation Id see: [Find your Organization ID.](https://docs.mulesoft.com/access-management/organization#find-your-organization-id)
+    example: eca25329-9592-4ff1-9054-1b08d103b991
+    pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+  field-actionId:
+    description: Document Action GUID
+    default: 90c3e286-72b5-42ca-92d0-22f86ea8d766
+    example: 90c3e286-72b5-42ca-92d0-22f86ea8d766
+    type: string
+    pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+  field-actionVersion:
+    description: Document Action Version like 1.0.0
+    default: 1.1.0
+    example: 1.1.0
+    type: string
+    pattern: ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
+  field-executionId:
+    description: Execution GUID
+    default: 022c61de-9bfc-4a94-8a9c-43c5f8ac153e
+    example: 022c61de-9bfc-4a94-8a9c-43c5f8ac153e
+    pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+  field-ExecutionStatus:
+    description: |
+      ## [Execution Results Reference](https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#execution-status-reference).
+
+      When you query the results of an execution, the IDP API returns any of the following statuses:
+
+      - `ACKNOWLEDGED`: The document action execution request was received.
+      - `IN_PROGRESS`: The execution started.
+      - `RESULTS_PENDING`: The execution finished and IDP is processing the results.
+      - `MANUAL_VALIDATION_REQUIRED`: The execution finished but the results need manual validation.
+      - `FAILED`: The execution request finished unsuccessfully.
+      - `PARTIAL_SUCCESS`: The execution request finished but some sub-tasks failed.
+      - `SUCCEEDED`: The execution request finished successfully.
+    default: IN_PROGRESS
+    enum:
+      - ACKNOWLEDGED
+      - IN_PROGRESS
+      - RESULTS_PENDING
+      - MANUAL_VALIDATION_REQUIRED
+      - FAILED
+      - PARTIAL_SUCCESS
+      - SUCCEEDED
+    example: IN_PROGRESS
+    type: string
+
+  DocumentExecutionPostResponse:
+    type: object
+    (rest-connect.default): application/json
+    properties:
+      id:
+        type: field-executionId
+        required: true
+      documentName:
+        type: string
+        example: IDP-PO-CD656092-BurlingtonTextiles.pdf
+        required: true
+      status:
+        type: field-ExecutionStatus
+        required: false
+
+  DocumentExecutionGetResponse:
+    type: object
+    (rest-connect.default): application/json
+    properties:
+      pages?:
+        type: array
+        items: Page
+      id?:
+        type: field-executionId
+      documentName?:
+        type: string
+      prompts?:
+        type: Prompt
+      status?:
+        type: field-ExecutionStatus
+  Page:
+    type: object
+    properties:
+      tables?:
+        type: object
+        properties: {}
+      page?:
+        type: string
+      fields?:
+        type: object
+        properties: {}
+      prompts?:
+        type: Prompt
+  Prompt:
+    type: object
+    properties:
+      answer?: Field
+      source?:
+        type: string
+      prompt?:
+        type: string
+  Field:
+    type: object
+    properties:
+      value?:
+        type: string
+      geometry?:
+        type: object
+        properties:
+          height:
+            type: number
+            required: false
+          left:
+            type: number
+            required: false
+          width:
+            type: number
+            required: false
+          top:
+            type: number
+            required: false
+      confidenceScore?:
+        type: number
+
+  ErrorResponse:
+    description: re
+    properties:
+      status:
+        default: 404
+        example: 404
+        type: number
+        format: int
+        required: true
+      title:
+        example: Not Found
+        type: string
+        required: true
+      detail:
+        example: "Action Id: 90c3e286-72b5-42ca-92d0-22f86ea8d766, Version: 1.1.0, Execution Id: 022c61de-9bfc-4a94-8a9c-43c5f8ac1531"
+        type: string
+        required: false
+
+securitySchemes:
+  mulesoft-connectedApp-oauth:
+    type: OAuth 2.0
+    description: |
+        ### [Configure Connected Apps](https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#create-a-connected-app)
+
+        ```
+          curl --location --request POST 'https://anypoint.mulesoft.com/accounts/api/v2/oauth2/token' \ 
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+            "grant_type": "client_credentials",
+            "client_id": "<connected-app-client-id>", 
+            "client_secret": "<connected-app-client-secret>" 
+          }'
+        ```
+
+    settings:
+      accessTokenUri: https://anypoint.mulesoft.com/accounts/api/v2/oauth2/token
+      authorizationGrants:
+        - client_credentials
+    describedBy:
+      headers:
+        Authorization:
+          description: |
+            Used to send a valid OAuth 2 access token. Bearer 234235246236236326
+          type: string
+          example: Bearer 0695bab3-e776-4d33-b61d-092789cb8765
+          pattern: ^Bearer [0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+      responses:
+        401:
+          headers:
+            Content-Type:
+              type: field-contentType
+          description: |
+            Bad or expired token. This can happen if the API consumer uses a revoked or expired access token. To fix, you should re-authenticate the user.
+          body:
+            application/problem+json:
+              type: ErrorResponse
+        403:
+          headers:
+            Content-Type:
+              type: field-contentType
+          description: |
+            Bad OAuth request (wrong consumer key, bad nonce, expired timestamp...). Unfortunately, re-authenticating the user won't help here.
+          body:
+            application/problem+json:
+              type: ErrorResponse
