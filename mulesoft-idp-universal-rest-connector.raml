@@ -96,6 +96,12 @@ uses:
         body:
           application/problem+json:
             type: object-commonError
+      406:
+        headers:
+           Content-Type:
+             description:
+        description: Not Acceptable
+      
 
   /{execution-id}:
     uriParameters:
