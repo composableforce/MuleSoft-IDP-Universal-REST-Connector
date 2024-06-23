@@ -20,13 +20,13 @@ description: |
   ### MuleSoft IDP Universal REST Connector
 
 
-baseUri: https://idp-rt.{region}.anypoint.mulesoft.com/api/{version}/organizations/{orgId}
+baseUri: https://idp-rt.{region}.anypoint.mulesoft.com/api/{platform-api-version}/organizations/{orgId}
 baseUriParameters:
   region:
     type: field-runtimeRegion
     required: true
-  platformversion:
-    type: field-runtimeRegion
+  platform-api-version:
+    type: field-version
     required: true
   orgId:
     type: field-orgId
