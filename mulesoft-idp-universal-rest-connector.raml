@@ -17,7 +17,7 @@ documentation:
      ### Welcome to MuleSoft IDP Universal REST Connector
 
 description: |
-  ### IDP Overview
+  ### MuleSoft IDP Universal REST Connector
 
 
 baseUri: https://idp-rt.{region}.anypoint.mulesoft.com/api/{apiVersion}/organizations/{orgId}
@@ -57,7 +57,7 @@ uses:
   post:
     (rest-connect.operationName): IDP - postDocumentActionExecution
     displayName: postDocumentActionExecution
-    description: |
+    description:
     body:
       multipart/form-data:
         properties:
@@ -98,9 +98,7 @@ uses:
     get:
       (rest-connect.operationName): IDP - getDocumentActionExecution
       displayName: getDocumentActionExecution
-      description: |
-      ## [Retrieve the Results of the Execution](https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#retrieve-the-results-of-the-execution)
-
+      description:
       queryParameters:
         valueOnly:
           type: field-valueOnly
