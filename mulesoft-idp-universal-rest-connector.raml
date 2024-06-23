@@ -41,11 +41,11 @@ uses:
   rest-connect: exchange_modules/org.mule.connectivity/rest-connect-library/1.0.2/rest-connect-library.raml
 
 
-/actions/{documentActionId}/versions/{documentActionVersion}/executions:
+/actions/{actionId}/versions/{actionVersion}/executions:
   uriParameters:
-    documentActionId:
+    actionId:
       type: field-actionId
-    documentActionVersion:
+    actionVersion:
       type: field-actionVersion
   
   post:
