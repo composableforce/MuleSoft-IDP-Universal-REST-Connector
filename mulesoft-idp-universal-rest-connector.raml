@@ -93,11 +93,12 @@ uses:
         type: field-executionId
     get:
       displayName: IDP - getDocumentActionExecution
-      description:
+      description: test
       queryParameters:
-        valueOnly:
-          type: field-valueOnly
-          required: false
+        valueOnly?:
+          description: Un-supported so use with Caution - Return Confidence levels when set to false
+          example: false
+          type: boolean
 
       responses:
         200:
