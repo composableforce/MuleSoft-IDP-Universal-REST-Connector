@@ -151,7 +151,7 @@ types:
       - application/json
       - application/problem+json
     default: application/json
-    pattern: ^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$
+    pattern: ^(application|audio|font|example|image|message|model|multipart|text|video|x-[^/\s]+|[^/\s]+/[^/\s]+)$
 
   field-runtimeRegion:
     displayName: IDP Runtime Region
