@@ -137,7 +137,60 @@ uses:
             application/problem+json:
               type: object-commonError
 
+securitySchemes:
+  mulesoft-connectedApp-oauth:
+    type: OAuth 2.0
+    description: |
+        ### [Configure Connected Apps](https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#create-a-connected-app)
+
+        ```
+          curl --location --request POST 'https://anypoint.mulesoft.com/accounts/api/v2/oauth2/token' \ 
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+            "grant_type": "client_credentials",
+            "client_id": "<connected-app-client-id>", 
+            "client_secret": "<connected-app-client-secret>" 
+          }'
+        ```
+    settings:
+      accessTokenUri: https://anypoint.mulesoft.com/accounts/api/v2/oauth2/token
+      authorizationGrants:
+        - client_credentials
+    describedBy:
+      headers:
+        Authorization:
+          description: |
+            Used to send a valid OAuth 2 access token. Bearer 234235246236236326
+          type: string
+          example: Bearer 0695bab3-e776-4d33-b61d-092789cb8765
+          pattern: ^Bearer [{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$
+      responses:
+        401:
+          headers:
+            Content-Type:
+              description:
+          description: |
+            Bad or expired token. This can happen if the API consumer uses a revoked or expired access token. To fix, you should re-authenticate the user.
+          body:
+            application/problem+json:
+              type: object-commonError
+        403:
+          headers:
+            Content-Type:
+              description:
+          description: |
+            Bad OAuth request (wrong consumer key, bad nonce, expired timestamp...). Unfortunately, re-authenticating the user won't help here.
+          body:
+            application/problem+json:
+              type: object-commonError
+
+
+
+
+
+
 types:
+
   callback:
     description: Optional Callback https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#callback-url 
     properties:
@@ -152,17 +205,6 @@ types:
     description: Un-supported so use with Caution - Return Confidence levels when set to false
     type: boolean
     example: false
-    
-
-  field-contentType:
-    displayName: Content Type
-    description: Currently supported media types
-    type: string
-    enum:
-      - application/json
-      - application/problem+json
-    default: application/json
-    pattern: ^(application|audio|font|example|image|message|model|multipart|text|video|x-[^/\s]+|[^/\s]+/[^/\s]+)$
 
   field-runtimeRegion:
     displayName: IDP Runtime Region
@@ -344,50 +386,3 @@ types:
         required: false
     example: {"status": 404,"title": "Not Found"}
     additionalProperties: false
-
-securitySchemes:
-  mulesoft-connectedApp-oauth:
-    type: OAuth 2.0
-    description: |
-        ### [Configure Connected Apps](https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#create-a-connected-app)
-
-        ```
-          curl --location --request POST 'https://anypoint.mulesoft.com/accounts/api/v2/oauth2/token' \ 
-          --header 'Content-Type: application/json' \
-          --data-raw '{
-            "grant_type": "client_credentials",
-            "client_id": "<connected-app-client-id>", 
-            "client_secret": "<connected-app-client-secret>" 
-          }'
-        ```
-    settings:
-      accessTokenUri: https://anypoint.mulesoft.com/accounts/api/v2/oauth2/token
-      authorizationGrants:
-        - client_credentials
-    describedBy:
-      headers:
-        Authorization:
-          description: |
-            Used to send a valid OAuth 2 access token. Bearer 234235246236236326
-          type: string
-          example: Bearer 0695bab3-e776-4d33-b61d-092789cb8765
-          pattern: ^Bearer [{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$
-      responses:
-        401:
-          headers:
-            Content-Type:
-              description:
-          description: |
-            Bad or expired token. This can happen if the API consumer uses a revoked or expired access token. To fix, you should re-authenticate the user.
-          body:
-            application/problem+json:
-              type: object-commonError
-        403:
-          headers:
-            Content-Type:
-              description:
-          description: |
-            Bad OAuth request (wrong consumer key, bad nonce, expired timestamp...). Unfortunately, re-authenticating the user won't help here.
-          body:
-            application/problem+json:
-              type: object-commonError
