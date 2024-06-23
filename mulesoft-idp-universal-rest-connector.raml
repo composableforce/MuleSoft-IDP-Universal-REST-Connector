@@ -199,11 +199,12 @@ types:
     pattern: ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
   field-executionId:
     displayName: IDP Execution Id
-    description: IDP Execution Id returned after 
+    description: IDP Execution Id returned after successful submission
     default: 022c61de-9bfc-4a94-8a9c-43c5f8ac153e
     example: 022c61de-9bfc-4a94-8a9c-43c5f8ac153e
     pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
   field-ExecutionStatus:
+    displayName: IDP Status
     description: |
       ## [Execution Results Reference](https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#execution-status-reference).
 
