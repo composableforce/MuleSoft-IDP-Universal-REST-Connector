@@ -244,17 +244,21 @@ types:
 
   DocumentExecutionPost:
     (rest-connect.default): application/json
+    description:
     displayName: Document Action Execution Response
     type: object
     properties:
       id:
+        description:
         type: field-executionId
         required: true
       documentName:
+        description:
         type: string
         example: IDP-PO-CD656092-BurlingtonTextiles.pdf
         required: true
       status:
+        description:
         type: field-ExecutionStatus
         required: false
     additionalProperties: false
@@ -262,6 +266,7 @@ types:
 
   DocumentExecutionGet:
     type: object
+    description:
     properties:
       pages?:
         type: array
