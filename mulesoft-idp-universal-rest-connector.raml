@@ -313,7 +313,8 @@ types:
         type: number
 
   ErrorResponse:
-    description: re
+    
+    description: IDP Common Error Response
     properties:
       status:
         default: 404
@@ -330,7 +331,7 @@ types:
         type: string
         required: false
     example: {"status": 404,"title": "Not Found"}
-    additionalProperties: 
+    additionalProperties: false
 
 securitySchemes:
   mulesoft-connectedApp-oauth:
