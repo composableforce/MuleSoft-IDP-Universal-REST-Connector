@@ -85,7 +85,7 @@ uses:
             type: field-contentType
         description: Created
         body:
-          application/json: DocumentExecutionPostResponse
+          application/json: DocumentExecutionPost
 
   /{execution-id}:
     uriParameters:
@@ -236,7 +236,7 @@ types:
     example: IN_PROGRESS
     type: string
 
-  DocumentExecutionPostResponse:
+  DocumentExecutionPost:
     (rest-connect.default): application/json
     displayName: Document Action Execution Response
     type: object
@@ -254,7 +254,7 @@ types:
     additionalProperties: false
     example: {"id": "af78b8b2-3867-4073-aac6-d24e01f48ae2","documentName": "IDP-PO-CD656092-BurlingtonTextiles.pdf"}
 
-  DocumentExecutionGetResponse:
+  DocumentExecutionGet:
     type: object
     properties:
       pages?:
