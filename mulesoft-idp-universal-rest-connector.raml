@@ -110,7 +110,8 @@ baseUriParameters:
       queryParameters:
         valueOnly:
           description: 🚨 Un-supported so use with Caution - Return Confidence levels when set to false
-          type: field-valueOnly
+          type: boolean
+          
           required: false
       responses:
         200:
@@ -216,22 +217,6 @@ types:
     example: 90c3e286-72b5-42ca-92d0-22f86ea8d766
     type: string
     pattern: ^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$
-
-  object-callback:
-    displayName: IDP Callback noAuthUrl Object
-    description: Optional Callback https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#callback-url 
-    properties:
-      noAuthUrl:
-        description: Your Callback URL to be used by IDP which can include query params
-        example: https://yourCallbackURL.com?youCanUseQueryParms=SomeGreatValue&apikey=43243442342424
-        type: string
-    additionalProperties: false
-
-  field-valueOnly:
-    displayName: 🚨 Un-supported - valueOnly
-    description: 🚨 Un-supported so use with Caution - Return Confidence levels when set to false, default behaviour is true so DONT SET
-    type: boolean
-    example: false
 
   field-actionVersion:
     displayName: IDP Document Action Id Version
