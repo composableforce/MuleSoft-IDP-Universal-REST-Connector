@@ -101,7 +101,15 @@ baseUriParameters:
             type: object-commonError
 
   /{execution-id}:
-    uriParameters:
+    uriParameters: # Duplicated as
+      apiVersion:
+        type: field-runtimeServiceApiVersion
+      orgId:
+        type: field-orgId
+      actionId:
+        type: field-actionId
+      actionVersion:
+        type: field-actionVersion
       execution-id:
         type: field-executionId
     get:
