@@ -110,7 +110,10 @@ baseUriParameters:
       queryParameters:
         valueOnly:
           description: 🚨 Un-supported so use with Caution - Return Confidence levels when set to false
-          type: boolean
+          type: string
+          enum:
+            - true
+            - false
           required: false
       responses:
         200:
