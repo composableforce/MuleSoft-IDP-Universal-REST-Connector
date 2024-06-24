@@ -10,10 +10,10 @@ baseUriParameters:
   region:
     type: field-runtimeRegion
 
-/api/{version}/organizations/{orgId}/actions/{actionId}/versions/{actionVersion}/executions:
+/api/{apiVersion}/organizations/{orgId}/actions/{actionId}/versions/{actionVersion}/executions:
   uriParameters:
-    runtimeVersion:
-      type: field-actionVersion
+    apiVersion:
+      type: field-runtimeServiceApiVersion
     orgId:
       type: field-orgId
     actionId:
