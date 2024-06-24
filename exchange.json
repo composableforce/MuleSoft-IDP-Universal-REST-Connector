@@ -1,12 +1,4 @@
 {
-  "dependencies": [
-    {
-      "version": "1.0.2",
-      "assetId": "rest-connect-library",
-      "groupId": "org.mule.connectivity",
-      "provided": false
-    }
-  ],
   "version": "1.0.0",
   "descriptorVersion": "1.0.0",
   "classifier": "raml",
