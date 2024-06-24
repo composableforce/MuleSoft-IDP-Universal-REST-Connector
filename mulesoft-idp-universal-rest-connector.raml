@@ -28,9 +28,21 @@ baseUriParameters:
       multipart/form-data:
         type: any
         description:  |
-
-
-          
+          ## Dataweave Example
+          ```
+            %dw 2.0
+            output xml
+            ns ns0 http://validationnamespace.raml.org
+            ---
+            {
+              ns0#root: {
+                ns0#callback: {
+                  ns0#noAuthUrl: "https://yourCallbackURL.com?youCanUseQueryParms=SomeGreatValue"
+                },
+                ns0#file: readUrl("classpath://myPdf.pdf", "application/octet-stream")
+              }
+            }
+          ```
     responses:
       201:
         description: Created
