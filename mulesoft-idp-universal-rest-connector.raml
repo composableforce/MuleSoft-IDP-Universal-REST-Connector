@@ -12,6 +12,8 @@ baseUriParameters:
 
 /api/{version}/organizations/{orgId}/actions/{actionId}/versions/{actionVersion}/executions:
   uriParameters:
+    runtimeVersion:
+      type: field-actionVersion
     orgId:
       type: field-orgId
     actionId:
