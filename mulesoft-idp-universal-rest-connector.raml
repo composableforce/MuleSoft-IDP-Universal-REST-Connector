@@ -1,115 +1,46 @@
 #%RAML 1.0
-title: MuleSoft IDP Universal REST Connector
+title: MuleSoft IDP Universal 🌐 REST Connector 🔌
 version: v1
+mediaType: application/json
+protocols: HTTPS
+securedBy: mulesoft-connectedApp-oauth
 
-documentation:
- - title: 📌 Why?
-   content: |
-     ### Welcome to MuleSoft IDP Universal REST Connector
-
- - title: 📌 How?
-   content: |
-     ### Welcome to MuleSoft IDP Universal REST Connector
-
-description: |
-  | Author | Date | Description
-  | -------- | ------- | ------- |
-  | G.Jeffcock | 23rd June 2024 | Launched| 
-  |||| 
-  ||||
-
-  Don't forget to leave a star on our repository! 📝
-  
-
-baseUri: https://idp-rt.{region}.anypoint.mulesoft.com/api/{platform-api-version}/organizations/{orgId}
+baseUri: https://idp-rt.{region}.anypoint.mulesoft.com/api/{version}
 baseUriParameters:
   region:
     type: field-runtimeRegion
-    required: true
-  platform-api-version:
-    type: field-platformApiVersion
-    required: true
-  orgId:
-    type: field-orgId
-    required: true
 
-
-mediaType: [ application/json ]
-
-protocols:
-  - HTTPS
-
-securedBy:
-  -   mulesoft-connectedApp-oauth
-
-uses:
-  rest-connect: exchange_modules/org.mule.connectivity/rest-connect-library/1.0.2/rest-connect-library.raml
-
-
-/actions/{action-id}/versions/{action-version}/executions:
+/organizations/{orgId}/actions/{actionId}/versions/{actionVersion}/executions:
   uriParameters:
-    action-id:
+    orgId:
+      type: field-orgId
+    actionId:
       type: field-actionId
-    action-version:
+    actionVersion:
       type: field-actionVersion
 
   post:
-    displayName: IDP - postDocumentActionExecution
-    description:
+    displayName: 🤖 IDP postDocumentActionExecution
+    description: Submits a file for IDP processing
     body:
       multipart/form-data:
-        description: 
-        properties:
-          callback: # Optional
-            (rest-connect.partName): callback
-            (rest-connect.partContentType): application/json
-            type: callback
-            required: false
-          file:
-            (rest-connect.partName): file     
-            (rest-connect.partContentType): application/octet-stream
-            (rest-connect.partFilenameParameter): filename
-            description: |
-                    **Accepted File Formats**: PDF, PNG, JPG (150 DPI or more recommended).
-                    **File Size Limits**: 10MB
-            type: file
-            fileTypes:
-              - image/jpeg
-              - image/png
-              - application/pdf
-            minLength: 1
-            maxLength: 10485760
-            required: true
-        additionalProperties: false
-
+        type: any
     responses:
       201:
-        headers:
-          Content-Type:
-            description:
         description: Created
         body:
-          application/json: DocumentExecutionPost
+          application/json: object-DocumentExecutionPostResponse
       400:
-        headers:
-          Content-Type:
-            description:
         description: Bad Request
         body:
           application/problem+json:
             type: object-commonError
       406:
-        headers:
-           Content-Type:
-             description:
         description: Not Acceptable
         body:
           application/problem+json:
             type: object-commonError
       500:
-        headers:
-           Content-Type:
-             description:
         description: Internal Server Error
         body:
           application/problem+json:
@@ -120,41 +51,29 @@ uses:
       execution-id:
         type: field-executionId
     get:
-      displayName: IDP - getDocumentActionExecution
-      description:
+      displayName: 🤖 IDP getDocumentActionExecution
+      description: Retrieves the State & Result Data of a document action execution.
       queryParameters:
         valueOnly:
-          description:
+          description: 🚨 Un-supported so use with Caution - Return Confidence levels when set to false
           type: field-valueOnly
           required: false
       responses:
         200:
-          headers:
-            Content-Type:
-              description:
           description: Success
           body:
-            application/json: DocumentExecutionGet
+            application/json: object-DocumentExecutionGetResponse
         404:
-          headers:
-            Content-Type:
-              description:
           description: Not Found
           body:
             application/problem+json:
               type: object-commonError
         406:
-          headers:
-            Content-Type:
-              description:
           description: Not Acceptable
           body:
             application/problem+json:
               type: object-commonError
         429:
-          headers:
-            Content-Type:
-              description:
           description: Too Many Requests
           body:
             application/problem+json:
@@ -162,8 +81,10 @@ uses:
 
 securitySchemes:
   mulesoft-connectedApp-oauth:
+    displayName: 🛡️ MuleSoft Connected App OAuth 2.0
     type: OAuth 2.0
     description: |
+
         ### [Configure Connected Apps](https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#create-a-connected-app)
 
         ```
@@ -177,7 +98,7 @@ securitySchemes:
         ```
     settings:
       accessTokenUri: https://anypoint.mulesoft.com/accounts/api/v2/oauth2/token
-      authorizationGrants:
+      authorizationGrants: 
         - client_credentials
     describedBy:
       headers:
@@ -189,18 +110,12 @@ securitySchemes:
           pattern: ^Bearer [{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$
       responses:
         401:
-          headers:
-            Content-Type:
-              description:
           description: |
             Bad or expired token. This can happen if the API consumer uses a revoked or expired access token. To fix, you should re-authenticate the user.
           body:
             application/problem+json:
               type: object-commonError
         403:
-          headers:
-            Content-Type:
-              description:
           description: |
             Bad OAuth request (wrong consumer key, bad nonce, expired timestamp...). Unfortunately, re-authenticating the user won't help here.
           body:
@@ -209,20 +124,6 @@ securitySchemes:
 
 
 types:
-
-  callback:
-    description: Optional Callback https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#callback-url 
-    properties:
-      noAuthUrl:
-        description: Your Callback URL to be used by IDP which can include query params
-        example: https://yourCallbackURL.com?youCanUseQueryParms=SomeGreatValue&apikey=43243442342424
-        type: string
-    additionalProperties: false
-
-  field-valueOnly:
-    description: Un-supported so use with Caution - Return Confidence levels when set to false
-    type: boolean
-    example: false
 
   field-runtimeRegion:
     displayName: IDP Runtime Region
@@ -237,9 +138,9 @@ types:
     default: us-east-1
     pattern: ^[a-z]{2}-[a-z]+-\d+$
 
-  field-platformApiVersion:
-    displayName: IDP Platform API Version
-    description: Current version of the MuleSoft IDP Platform API
+  field-runtimeServiceApiVersion:
+    displayName: IDP Runtime Service API Version
+    description: Current version of the MuleSoft IDP Runtime Service API Version
     type: string
     enum:
       - v1
@@ -247,6 +148,7 @@ types:
     maxLength: 2
     minLength: 2
     pattern: ^v[0-9]$
+
   field-orgId:
     displayName: MuleSoft Anypoint Organization Id
     description: |
@@ -260,6 +162,23 @@ types:
     example: 90c3e286-72b5-42ca-92d0-22f86ea8d766
     type: string
     pattern: ^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$
+
+  object-callback:
+    displayName: IDP Callback noAuthUrl Object
+    description: Optional Callback https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#callback-url 
+    properties:
+      noAuthUrl:
+        description: Your Callback URL to be used by IDP which can include query params
+        example: https://yourCallbackURL.com?youCanUseQueryParms=SomeGreatValue&apikey=43243442342424
+        type: string
+    additionalProperties: false
+
+  field-valueOnly:
+    displayName: 🚨 Un-supported - valueOnly
+    description: 🚨 Un-supported so use with Caution - Return Confidence levels when set to false, default behaviour is true so DONT SET
+    type: boolean
+    example: false
+
   field-actionVersion:
     displayName: IDP Document Action Id Version
     description: Document Action Version like 1.0.0
@@ -267,6 +186,7 @@ types:
     example: 1.1.0
     type: string
     pattern: ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
+
   field-executionId:
     displayName: IDP Execution Id
     description: IDP Execution Id returned after successful submission
@@ -274,12 +194,13 @@ types:
     example: 022c61de-9bfc-4a94-8a9c-43c5f8ac153e
     type: string
     pattern: ^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$
+
   field-ExecutionStatus:
-    displayName: IDP Status
+    displayName: IDP Execution Status
     description: |
       ## [Execution Results Reference](https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#execution-status-reference).
 
-      When you query the results of an execution, the IDP API returns any of the following statuses:
+      When you query the results of an execution, the IDP API returns the status which can be any of the following:
 
       - `ACKNOWLEDGED`: The document action execution request was received.
       - `IN_PROGRESS`: The execution started.
@@ -300,29 +221,27 @@ types:
     example: IN_PROGRESS
     type: string
 
-  DocumentExecutionPost:
-    (rest-connect.default): application/json
-    description:
-    displayName: Document Action Execution Response
+  object-DocumentExecutionPostResponse:
+    displayName: IDP Document Submission Response Object
+    description: 
     type: object
     properties:
       id:
-        description:
         type: field-executionId
         required: true
       documentName:
-        description:
+        description: Document Name and Extension
         type: string
         example: IDP-PO-CD656092-BurlingtonTextiles.pdf
         required: true
       status:
-        description:
         type: field-ExecutionStatus
         required: false
     additionalProperties: false
     example: {"id": "af78b8b2-3867-4073-aac6-d24e01f48ae2","documentName": "IDP-PO-CD656092-BurlingtonTextiles.pdf"}
 
-  DocumentExecutionGet:
+  object-DocumentExecutionGetResponse:
+    displayName: IDP Retrieve Execution Response Object
     type: object
     description:
     properties:
@@ -338,6 +257,7 @@ types:
       status?:
         type: field-ExecutionStatus
   Page:
+    displayName: IDP Retrieve Execution Response Page Object
     type: object
     properties:
       tables?:
@@ -351,6 +271,7 @@ types:
       prompts?:
         type: Prompt
   Prompt:
+    displayName: IDP Retrieve Execution Response Prompt Object
     type: object
     properties:
       answer?: Field
@@ -359,6 +280,7 @@ types:
       prompt?:
         type: string
   Field:
+    displayName: IDP Retrieve Execution Response Field Object
     type: object
     properties:
       value?:
@@ -404,3 +326,39 @@ types:
         required: false
     example: {"status": 404,"title": "Not Found"}
     additionalProperties: false
+
+description: |
+
+  mediaType: application/json
+
+  protocols: HTTPS
+
+  securedBy: 🛡️ MuleSoft Connected App OAuth 2.0
+
+  | Author | Date | Description
+  | -------- | ------- | ------- |
+  | G.Jeffcock | 23rd June 2024 | Launched| 
+  |||| 
+  ||||
+
+  **IDP Runtime Service API connector**
+
+  **Integrating IDP with Anypoint Studio**
+
+  Execute a published document action and retrieve the results from Anypoint Studio using that document action’s IDP Runtime Service API connector. This connector generates automatically when you publish a document action to Anypoint Exchange. Then, you can download it as a Mule connector from Exchange.
+
+  Each document action version generates a different connector. For example, when you publish a document action for the first time, it generates a connector in Exchange that executes version `1.0.0` of this document action. Then, if you modify the document action and republish it as version `1.1.0`, it generates a different connector that you must download and install in Studio to execute this new document action version. Consider this behavior when building your integrations.
+
+  The IDP Runtime Service API connector has the following operations:
+
+  - **getDocumentActionExecution**Retrieves the result of a document action execution.
+  - **postDocumentActionExecution**Submits a document to IDP for processing.
+
+documentation:
+ - title: 📌 Why?
+   content: |
+     ### MuleSoft IDP Universal 🌐 REST Connector 🔌
+
+ - title: 📌 How?
+   content: |
+     ### MuleSoft IDP Universal 🌐 REST Connector 🔌
