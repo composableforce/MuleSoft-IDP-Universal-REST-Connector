@@ -64,6 +64,7 @@ baseUriParameters:
 
             %dw 2.0
             output java
+            import * from dw::core::Binaries
             ---
             {
               parts: {
@@ -82,20 +83,14 @@ baseUriParameters:
                     },
                     "Content-Type": "application/pdf"    
                   },
-                  content: readUrl("classpath://IDP-PO-CD656092-BurlingtonTextiles.pdf", "application/octet-stream")
+                  content: fromBase64("JVBERi0xLjcNCiW...deleted for brevity.....0YNCg==")
                 }
               }
             }
           ```
 
 
-
-
-
-
-
-
-          ## Would produce the following Multipart Example
+          ## Would BOTH produce the following Multipart Example
           ```
             ------WebKitFormBoundary2Iqii0OMIdEA33iA
             Content-Disposition: form-data; name="callback"
