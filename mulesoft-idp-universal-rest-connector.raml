@@ -101,15 +101,7 @@ baseUriParameters:
             type: object-commonError
 
   /{execution-id}:
-    uriParameters: # Duplicated because exchange won't respect order without
-      apiVersion:
-        type: field-runtimeServiceApiVersion
-      orgId:
-        type: field-orgId
-      actionId:
-        type: field-actionId
-      actionVersion:
-        type: field-actionVersion
+    uriParameters:
       execution-id:
         type: field-executionId
     get:
