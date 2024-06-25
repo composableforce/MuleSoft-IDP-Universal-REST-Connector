@@ -11,7 +11,22 @@ baseUriParameters:
     type: field-runtimeRegion
 
 /api/{apiVersion}/organizations/{orgId}/reviews
-
+  uriParameters:
+    apiVersion:
+      type: field-runtimeServiceApiVersion
+    orgId:
+      type: field-orgId
+  get:
+    displayName: 🤖 IDP getDocumentActionExecution
+    description: Retrieves the State & Result Data of a document action execution.
+      queryParameters:
+        valueOnly:
+          description: 🚨 Un-supported so use with Caution - Return Confidence levels when set to false
+          type: string
+          enum: # Bug in portal with Boolean
+            - "false"
+            - "true"
+          required: false
 
 /api/{apiVersion}/organizations/{orgId}/actions/{actionId}/versions/{actionVersion}/executions:
   uriParameters:
