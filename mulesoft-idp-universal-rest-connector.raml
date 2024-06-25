@@ -10,21 +10,6 @@ baseUriParameters:
   region:
     type: field-runtimeRegion
 
-/api/{apiVersion}/organizations/{orgId}/reviews:
-  uriParameters:
-    apiVersion:
-      type: field-runtimeServiceApiVersion
-    orgId:
-      type: field-orgId
-  get:
-    displayName: 🚨 IDP getReviewTasks
-    description: Retrieves current Review Tasks Stack.
-    queryParameters:
-      valueOnly:
-        description: 🚨 Un-supported so use with Caution - Return Confidence levels when set to false
-        type: string
-        required: false
-
 /api/{apiVersion}/organizations/{orgId}/actions/{actionId}/versions/{actionVersion}/executions:
   uriParameters:
     apiVersion:
