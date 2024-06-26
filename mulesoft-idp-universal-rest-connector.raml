@@ -5,17 +5,15 @@ mediaType: application/json
 protocols: HTTPS
 securedBy: mulesoft-connectedApp-oauth
 
-baseUri: https://idp-rt.{region}.anypoint.mulesoft.com/api/{ersion}/organizations/{orgId}
+baseUri: https://idp-rt.{region}.anypoint.mulesoft.com/api/{version}/organizations/{orgId}
 baseUriParameters:
   region:
     type: field-runtimeRegion
-
-/api/{apiVersion}/organizations/{orgId}/actions/{actionId}/versions/{actionVersion}/executions:
-  uriParameters:
-    apiVersion:
-      type: field-runtimeServiceApiVersion
-    orgId:
+  orgId:
       type: field-orgId
+
+/actions/{actionId}/versions/{actionVersion}/executions:
+  uriParameters:
     actionId:
       type: field-actionId
     actionVersion:
