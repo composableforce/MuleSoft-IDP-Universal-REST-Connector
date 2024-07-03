@@ -46,11 +46,11 @@ baseUriParameters:
                     "Content-Disposition": {
                       name: "file",  // Required and hard-coded to file
                       filename: "IDP-PO-CD656092-BurlingtonTextiles.pdf", // Required Name & Mandatory Extension 
-                      subtype: "form-data"
+                      subtype: "form-data" // Required and hard-coded to form-data
                     },
-                    "Content-Type": "application/octet-stream"    
+                    "Content-Type": "application/octet-stream"  // Required and hard-coded to application/octet-stream no need to pass media type  
                   },
-                  content: readUrl("classpath://IDP-PO-CD656092-BurlingtonTextiles.pdf", "application/octet-stream")
+                  content: readUrl("classpath://IDP-PO-CD656092-BurlingtonTextiles.pdf", "application/octet-stream").
                 }
               }
             }
