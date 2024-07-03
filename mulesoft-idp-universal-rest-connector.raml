@@ -44,11 +44,11 @@ baseUriParameters:
                 file: {
                   headers: {
                     "Content-Disposition": {
-                      name: "file",  // Required and hard-coded to file
-                      filename: "IDP-PO-CD656092-BurlingtonTextiles.pdf", // Required Name & Mandatory Extension 
-                      subtype: "form-data" // Required and hard-coded to form-data
+                      name: "file",
+                      filename: "IDP-PO-CD656092-BurlingtonTextiles.pdf",
+                      subtype: "form-data"
                     },
-                    "Content-Type": "application/octet-stream"  // Required and hard-coded to application/octet-stream no need to pass media type  
+                    "Content-Type": "application/octet-stream"
                   },
                   content: readUrl("classpath://IDP-PO-CD656092-BurlingtonTextiles.pdf", "application/octet-stream").
                 }
@@ -79,7 +79,7 @@ baseUriParameters:
                       filename: "IDP-PO-CD656092-BurlingtonTextiles.pdf",
                       subtype: "form-data"
                     },
-                    "Content-Type": "application/pdf"    
+                    "Content-Type": "application/octet-stream"    
                   },
                   content: fromBase64("JVBERi0xLjcNCiW...deleted for brevity.....0YNCg==")
                 }
@@ -211,7 +211,7 @@ securitySchemes:
 
 
 types:
-
+ 
   field-runtimeRegion:
     displayName: IDP Runtime Region
     description: |
