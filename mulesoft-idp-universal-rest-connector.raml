@@ -304,16 +304,16 @@ types: # Considered use of Library, but the dependency was deemed to hinder adop
     properties:
       pages?:
         type: array
-        items: Page
+        items: object-Document-Page
       id?:
         type: field-executionId
       documentName?:
         type: string
       prompts?:
-        type: Prompt
+        type: object-Document-Prompt
       status?:
         type: field-ExecutionStatus
-  Page:
+  object-Document-Page:
     displayName: IDP Retrieve Execution Response Page Object
     type: object
     properties:
@@ -326,17 +326,17 @@ types: # Considered use of Library, but the dependency was deemed to hinder adop
         type: object
         properties: {}
       prompts?:
-        type: Prompt
-  Prompt:
+        type: object-Document-Prompt
+  object-Document-Prompt:
     displayName: IDP Retrieve Execution Response Prompt Object
     type: object
     properties:
-      answer?: Field
+      answer?: object-Document-Field
       source?:
         type: string
       prompt?:
         type: string
-  Field:
+  object-Document-Field:
     displayName: IDP Retrieve Execution Response Field Object
     type: object
     properties:
