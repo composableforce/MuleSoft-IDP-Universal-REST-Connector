@@ -225,17 +225,6 @@ types: # Considered use of Library, but the dependency was deemed to hinder adop
     default: us-east-1
     pattern: ^[a-z]{2}-[a-z]+-\d+(\.eu1)?$
 
-  field-runtimeServiceApiVersion:
-    displayName: IDP Runtime Service API Version
-    description: Current version of the MuleSoft IDP Runtime Service API Version
-    type: string
-    enum:
-      - v1
-    default: v1
-    maxLength: 2
-    minLength: 2
-    pattern: ^v[0-9]$
-
   field-orgId:
     displayName: MuleSoft Anypoint Organization Id
     description: |
