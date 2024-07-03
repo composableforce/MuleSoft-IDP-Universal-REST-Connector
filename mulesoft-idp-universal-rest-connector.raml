@@ -212,18 +212,18 @@ securitySchemes:
 
 types: # Considered use of Library, but the dependency was deemed to hinder adoption
  
-    field-runtimeRegion:
-        displayName: IDP Runtime Region
-        description: |
-          Currently supported IDP Runtime Regions
-          - eu-central-1.eu1
-          - us-east-1
-        type: string
-        enum:
-          - eu-central-1.eu1
-          - us-east-1
-        default: us-east-1
-        pattern: ^[a-z]{2}-[a-z]+-\d+(\.eu1)?$
+  field-runtimeRegion:
+    displayName: IDP Runtime Region
+    description: |
+      Currently supported IDP Runtime Regions
+      - eu-central-1.eu1
+      - us-east-1
+    type: string
+    enum:
+      - eu-central-1.eu1
+      - us-east-1
+    default: us-east-1
+    pattern: ^[a-z]{2}-[a-z]+-\d+(\.eu1)?$
 
   field-runtimeServiceApiVersion:
     displayName: IDP Runtime Service API Version
