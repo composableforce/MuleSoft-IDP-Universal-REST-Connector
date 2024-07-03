@@ -39,16 +39,16 @@ baseUriParameters:
                   headers: {
                     "Content-Type": "text/plain"
                   },
-                    content : '{"noAuthUrl": "https://enny4ln4hb1v.x.pipedream.net/"}'
+                    content : '{"noAuthUrl": "https://enny4ln4hb1v.x.pipedream.net/"}' // Note SINGLE quotes
                   },
                 file: {
                   headers: {
                     "Content-Disposition": {
-                      name: "file",
-                      filename: "IDP-PO-CD656092-BurlingtonTextiles.pdf",
+                      name: "file",  // Required and hard-coded to file
+                      filename: "IDP-PO-CD656092-BurlingtonTextiles.pdf", // Required Name & Mandatory Extension 
                       subtype: "form-data"
                     },
-                    "Content-Type": "application/pdf"    
+                    "Content-Type": "application/octet-stream"    
                   },
                   content: readUrl("classpath://IDP-PO-CD656092-BurlingtonTextiles.pdf", "application/octet-stream")
                 }
