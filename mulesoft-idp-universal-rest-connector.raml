@@ -20,7 +20,7 @@ baseUriParameters:
       type: field-actionVersion
 
   post:
-    displayName: 🤖 IDP postDocumentActionExecution
+    displayName: 🌐 IDP postDocumentActionExecution
     description: Submits a file for IDP processing
     body:
       multipart/form-data:
@@ -135,7 +135,7 @@ baseUriParameters:
       execution-id:
         type: field-executionId
     get:
-      displayName: 🤖 IDP getDocumentActionExecution
+      displayName: 🌐 IDP getDocumentActionExecution
       description: Retrieves the State & Result Data of a document action execution.
       queryParameters:
         valueOnly:
@@ -413,18 +413,34 @@ description: |
   |||| 
   ||||
 
-  **IDP Runtime Service API connector**
+  **MuleSoft IDP Universal 🌐 REST Connector 🔌**
 
-  **Integrating IDP with Anypoint Studio**
+  When [Integrating IDP with Anypoint Studio](https://docs.mulesoft.com/idp/integrating-idp-with-anypoint-studio), it's important to consider a few potential challenges, which the MuleSoft IDP Universal 🌐 REST Connector 🔌 is designed to mitigate:
 
-  Execute a published document action and retrieve the results from Anypoint Studio using that document action’s IDP Runtime Service API connector. This connector generates automatically when you publish a document action to Anypoint Exchange. Then, you can download it as a Mule connector from Exchange.
+  *📍 Connector Sprawl:*
 
-  Each document action version generates a different connector. For example, when you publish a document action for the first time, it generates a connector in Exchange that executes version `1.0.0` of this document action. Then, if you modify the document action and republish it as version `1.1.0`, it generates a different connector that you must download and install in Studio to execute this new document action version. Consider this behavior when building your integrations.
+  **Challenge**: Every published action creates a new connector, leading to an overwhelming number of connectors.
 
-  The IDP Runtime Service API connector has the following operations:
+  **Solution**: The Universal REST Connector consolidates these actions, significantly reducing the number of connectors required.
 
-  - **getDocumentActionExecution**Retrieves the result of a document action execution.
-  - **postDocumentActionExecution**Submits a document to IDP for processing.
+  *📍 Reconfiguration Overload:*
+
+  **Challenge**: Each document action version generates a different connector, necessitating frequent reconfigurations in Anypoint projects.
+
+  **Solution**: By using a single connector, you minimize the need for constant reconfiguration, streamlining project management.
+
+  *📍 Support for Undocumented Functionality:*
+
+  **Challenge**: Integrations often need to support functionalities that aren't well-documented.
+
+  **Solution**: The Universal REST Connector is designed to handle undocumented functionalities, providing more robust and flexible integration capabilities.
+
+  *📍 Rapid Onboarding for Enterprise Scale:*
+
+  **Challenge**: Creating a universal solution that processes and calls at an enterprise scale requires the ability to quickly onboard new document actions.
+
+  **Solution**: This connector allows for the rapid onboarding of new document actions, enabling your enterprise to scale efficiently and effectively.
+
 
 documentation:
  - title: 📌 Why?
