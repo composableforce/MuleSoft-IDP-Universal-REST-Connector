@@ -23,7 +23,11 @@ baseUriParameters:
       size:
         type: number
       sort:
-        
+        type: string
+        enum:
+          - updatedAt,desc
+          - updatedAt,asc
+          
 
 /actions/{actionId}/reviews/{executionId}:
   securedBy: mulesoft-basic-login
