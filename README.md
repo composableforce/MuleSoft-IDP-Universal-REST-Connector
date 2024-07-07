@@ -38,3 +38,8 @@
   **Challenge**: Creating a universal solution that processes and calls at an enterprise scale requires the ability to quickly onboard new document actions.
 
   **Solution**: This connector allows for the rapid onboarding of new document actions, enabling your enterprise to scale efficiently and effectively.
+
+HowTo: See jar in the root of this repo
+![mulesoft-idp-universal-rest-connector](https://github.com/composableforce/MuleSoft-IDP-Universal-REST-Connector/assets/21179972/9c9f3ca0-eebb-46d2-882d-b052b171bc86)
+
+  
