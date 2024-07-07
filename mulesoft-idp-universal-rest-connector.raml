@@ -225,6 +225,21 @@ securitySchemes:
           body:
             application/problem+json:
               type: object-commonError
+  mulesoft-basic-login:
+    type: Basic Authentication
+    displayName: 🛡️ MuleSoft Anypoint Login 
+    describedBy:
+      responses:
+        "200":
+          body:
+            application/json:
+              properties:
+                access_token:
+                  example: d127e2ec-a703-4e2a-8629-e9158804748ble
+                  type: string
+                token_type:
+                  example: bearer
+                  type: string
 
 
 types: # Considered use of Library, but the dependency was deemed to hinder adoption
