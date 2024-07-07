@@ -3,9 +3,6 @@ title: MuleSoft IDP Universal 🌐 REST Connector 🔌
 version: v1
 mediaType: application/json
 protocols: HTTPS
-
-uses:
-  rest-connect: exchange_modules/org.mule.connectivity/rest-connect-library/1.0.2/rest-connect-library.raml
   
 
 baseUri: https://idp-rt.{region}.anypoint.mulesoft.com/api/{version}/organizations/{orgId}
@@ -16,22 +13,21 @@ baseUriParameters:
     type: field-orgId
 
 /actions/{actionId}/reviews/{executionId}:
+  securedBy: mulesoft-basic-login
   uriParameters:
     actionId:
       type: field-actionId
     executionId:
       type: field-executionId
   get:
-    (rest-connect.userSelectedSecuritySchemes): mulesoft-basic-login
     displayName: 🌐 IDP getExecutionReviewTask
     description: Get an Execution Review Task
   patch:
-    (rest-connect.userSelectedSecuritySchemes): mulesoft-basic-login
     displayName: 🌐 IDP updateExecutionReviewTask
     description: Update an Exection Review Task
 
 /actions/{actionId}/versions/{actionVersion}/executions:
-  
+  securedBy: mulesoft-connectedApp-oauth
   uriParameters:
     actionId:
       type: field-actionId
