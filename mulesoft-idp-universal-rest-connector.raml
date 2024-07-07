@@ -11,20 +11,6 @@ baseUriParameters:
   orgId:
     type: field-orgId
 
-/reviews:
-  securedBy: mulesoft-basic-login
-  get:
-    displayName: 🌐 IDP getReviewTaskList
-    description: Get Review Task List
-    queryParameters:
-      page:
-        type: number
-        description: Zero Based
-        default: 0
-      size:
-        type: number
-        default: 20
-
 /actions/{actionId}/reviews/{executionId}:
   securedBy: mulesoft-basic-login
   uriParameters:
@@ -220,6 +206,21 @@ baseUriParameters:
           body:
             application/problem+json:
               type: object-commonError
+
+/reviews:
+  securedBy: mulesoft-basic-login
+  get:
+    displayName: 🌐 IDP getReviewTaskList
+    description: Get Review Task List
+    queryParameters:
+      page:
+        type: number
+        description: Zero Based
+        default: 0
+      size:
+        type: number
+        default: 20
+
 
 securitySchemes:
   mulesoft-connectedApp-oauth:
