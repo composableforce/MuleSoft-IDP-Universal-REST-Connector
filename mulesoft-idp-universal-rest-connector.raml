@@ -15,12 +15,13 @@ baseUriParameters:
   orgId:
     type: field-orgId
 
-/actions/{actionId}/reviews/{executionId}
+/actions/{actionId}/reviews/{executionId}:
   uriParameters:
     actionId:
       type: field-actionId
     executionId:
-      
+      type:
+  get:
 
 
 /actions/{actionId}/versions/{actionVersion}/executions:
@@ -141,9 +142,9 @@ baseUriParameters:
           application/problem+json:
             type: object-commonError
 
-  /{execution-id}:
+  /{executionId}:
     uriParameters:
-      execution-id:
+      executionId:
         type: field-executionId
     get:
       displayName: 🌐 IDP getDocumentActionExecution
