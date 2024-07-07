@@ -24,16 +24,6 @@ baseUriParameters:
       size:
         type: number
         default: 20
-      sort:
-        type: string
-        enum:
-          - updatedAt,desc
-          - updatedAt,asc
-          - type,desc
-          - type,asc
-          - name,desc
-          - name,asc
-        default: updatedAt,desc
 
 /actions/{actionId}/reviews/{executionId}:
   securedBy: mulesoft-basic-login
