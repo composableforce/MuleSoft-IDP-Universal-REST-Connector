@@ -390,6 +390,27 @@ types: # Considered use of Library, but the dependency was deemed to hinder adop
       confidenceScore?:
         type: number
 
+properties:
+    results: 
+      type: array
+
+    queriesResults: 
+      items:
+        type:
+          properties:
+            id: string
+            name: string
+            query: string
+            result: nil
+            confidenceScore: nil
+            page: number
+            geometry: nil
+    analyzersResults: 
+      type: array
+
+    signaturesResults: 
+      type: array
+
   object-commonError:
     displayName: 🆘 IDP Common Error Response
     description: IDP Common Error Response
