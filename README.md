@@ -3,6 +3,7 @@
   protocols: HTTPS
 
   securedBy: 🛡️ MuleSoft Connected App OAuth 2.0
+  
   securedBy: 🛡️ MuleSoft Anypoint Login
   | Author | Date | Description
   | -------- | ------- | ------- |
