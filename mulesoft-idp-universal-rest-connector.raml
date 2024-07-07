@@ -20,8 +20,10 @@ baseUriParameters:
       page:
         type: number
         description: Zero Based
+        default: 0
       size:
         type: number
+        default: 20
       sort:
         type: string
         enum:
@@ -31,6 +33,7 @@ baseUriParameters:
           - type,asc
           - name,desc
           - name,asc
+        default: 
 
 /actions/{actionId}/reviews/{executionId}:
   securedBy: mulesoft-basic-login
