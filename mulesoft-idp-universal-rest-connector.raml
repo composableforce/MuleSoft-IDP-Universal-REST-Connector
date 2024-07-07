@@ -60,9 +60,8 @@ baseUriParameters:
       type: field-actionVersion
 
   post:
-    displayName: 🌐 IDP postDocumentActionExecution
     displayName: 🌐 IDP - Task - Submit
-    description: "postDocumentActionExecution" Submits a file for IDP processing
+    description: postDocumentActionExecution - Submits a file for IDP processing
     body:
       multipart/form-data:
         type: any
@@ -178,6 +177,7 @@ baseUriParameters:
         type: field-executionId
     get:
       displayName: 🌐 IDP getDocumentActionExecution
+      displayName: 🌐 IDP - Task - GetResult
       description: Retrieves the State & Result Data of a document action execution.
       queryParameters:
         valueOnly:
