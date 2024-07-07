@@ -21,12 +21,17 @@ baseUriParameters:
   get:
     displayName: 🌐 IDP getExecutionReviewTask
     description: Get an Execution Review Task
+    responses:
+      200:
+        body:
+          application/json:
+            type: object-reviewTask
   patch:
     displayName: 🌐 IDP updateExecutionReviewTask
     description: Update an Exection Review Task
     body:
       application/json:
-        type: 
+        type: object-reviewTask
 
 /actions/{actionId}/versions/{actionVersion}/executions:
   securedBy: mulesoft-connectedApp-oauth
