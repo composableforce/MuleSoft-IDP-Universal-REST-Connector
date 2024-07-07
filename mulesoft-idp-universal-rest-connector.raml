@@ -5,7 +5,8 @@ mediaType: application/json
 protocols: HTTPS
 securedBy: mulesoft-connectedApp-oauth
 
-
+uses:
+  rest-connect: exchange_modules/org.mule.connectivity/rest-connect-library/1.0.2/rest-connect-library.raml
   
 
 baseUri: https://idp-rt.{region}.anypoint.mulesoft.com/api/{version}/organizations/{orgId}
