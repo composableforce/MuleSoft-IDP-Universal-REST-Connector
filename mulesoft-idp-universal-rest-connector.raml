@@ -4,7 +4,6 @@ version: v1
 mediaType: application/json
 protocols: HTTPS
   
-
 baseUri: https://idp-rt.{region}.anypoint.mulesoft.com/api/{version}/organizations/{orgId}
 baseUriParameters:
   region:
@@ -146,6 +145,7 @@ baseUriParameters:
             type: object-commonError
 
   /{executionId}:
+    securedBy: mulesoft-connectedApp-oauth
     uriParameters:
       executionId:
         type: field-executionId
