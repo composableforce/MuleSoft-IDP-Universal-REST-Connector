@@ -11,6 +11,12 @@ baseUriParameters:
   orgId:
     type: field-orgId
 
+/reviews:
+  securedBy: mulesoft-basic-login
+  get:
+    displayName: 🌐 IDP getReviewTask
+    description: Get an Execution Review Task
+
 /actions/{actionId}/reviews/{executionId}:
   securedBy: mulesoft-basic-login
   uriParameters:
