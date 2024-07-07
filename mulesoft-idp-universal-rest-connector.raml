@@ -37,6 +37,19 @@ baseUriParameters:
     body:
       application/json:
         type: object-reviewTask
+    responses:
+      200:
+        body:
+          application/json:
+            type: object-reviewTask
+      400:
+        body:
+          application/json:
+            type: object-commonError
+      404:
+        body:
+          application/json:
+            type: object-commonError
 
 /actions/{actionId}/versions/{actionVersion}/executions:
   securedBy: mulesoft-connectedApp-oauth
