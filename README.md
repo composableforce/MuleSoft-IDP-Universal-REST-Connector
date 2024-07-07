@@ -40,6 +40,9 @@
 
   **Solution**: This connector allows for the rapid onboarding of new document actions, enabling your enterprise to scale efficiently and effectively.
 
+  Making Composable IDP a reality:
+  <img width="1159" alt="Screenshot 2024-07-07 at 10 52 57" src="https://github.com/composableforce/MuleSoft-IDP-Universal-REST-Connector/assets/21179972/d810e229-aa9b-4aaf-8944-d038cf2c0b67">
+
 HowTo: See jar in the root of this repo
 ![mulesoft-idp-universal-rest-connector](https://github.com/composableforce/MuleSoft-IDP-Universal-REST-Connector/assets/21179972/9c9f3ca0-eebb-46d2-882d-b052b171bc86)
 
