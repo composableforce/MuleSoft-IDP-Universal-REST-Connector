@@ -18,8 +18,9 @@ baseUriParameters:
     description: Get Review Task List
     queryParameters:
       page:
-        type: 
+        type: number
       size:
+        type: number
 
 /actions/{actionId}/reviews/{executionId}:
   securedBy: mulesoft-basic-login
