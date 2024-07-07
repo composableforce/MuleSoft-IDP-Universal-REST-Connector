@@ -27,7 +27,10 @@ baseUriParameters:
         enum:
           - updatedAt,desc
           - updatedAt,asc
-          
+          - type,desc
+          - type,asc
+          - name,desc
+          - name,asc
 
 /actions/{actionId}/reviews/{executionId}:
   securedBy: mulesoft-basic-login
