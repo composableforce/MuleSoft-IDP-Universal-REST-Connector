@@ -14,8 +14,10 @@ baseUriParameters:
 /reviews:
   securedBy: mulesoft-basic-login
   get:
-    displayName: 🌐 IDP getReviewTask
-    description: Get an Execution Review Task
+    displayName: 🌐 IDP getReviewTaskList
+    description: Get Review Task List
+    queryParameters:
+      
 
 /actions/{actionId}/reviews/{executionId}:
   securedBy: mulesoft-basic-login
